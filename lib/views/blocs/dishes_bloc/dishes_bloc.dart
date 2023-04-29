@@ -6,7 +6,7 @@ part 'dishes_event.dart';
 part 'dishes_state.dart';
 
 class DishesBloc extends Bloc<DishesEvent, DishesState> {
-  // Статические методы для прослушивания и получения кубита
+  // Статические методы для прослушивания и получения блока
   static DishesState watchState(BuildContext context) => context.watch<DishesBloc>().state;
   static DishesBloc read(BuildContext context) => context.read<DishesBloc>();
 

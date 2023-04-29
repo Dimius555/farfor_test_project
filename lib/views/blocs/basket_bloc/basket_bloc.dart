@@ -7,7 +7,7 @@ part 'basket_event.dart';
 part 'basket_state.dart';
 
 class BasketBloc extends Bloc<BasketEvent, BasketState> {
-  // Статические методы для прослушивания и получения кубита
+  // Статические методы для прослушивания и получения блока
   static BasketState watchState(BuildContext context) => context.watch<BasketBloc>().state;
   static BasketBloc read(BuildContext context) => context.read<BasketBloc>();
 

@@ -5,6 +5,7 @@ import 'package:farfor_test_project/configurations/theme/theme_notifier.dart';
 import 'package:farfor_test_project/service_locator.dart';
 import 'package:farfor_test_project/views/blocs/basket_bloc/basket_bloc.dart';
 import 'package:farfor_test_project/views/blocs/dishes_bloc/dishes_bloc.dart';
+import 'package:farfor_test_project/views/blocs/sales_bloc/sales_bloc.dart';
 import 'package:farfor_test_project/views/pages/app_tab_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,7 +46,10 @@ class AppSetup extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => BasketBloc(),
-        )
+        ),
+        BlocProvider(
+          create: (_) => SalesBloc(salesRepository: sl())..add(FetchSalesEvent()),
+        ),
       ],
       child: const MainApp(),
     );
