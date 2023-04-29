@@ -46,7 +46,38 @@ class BasketDishWidget extends StatelessWidget {
                     style: theme.caption1,
                   ),
                   const SizedBox(height: 10),
-                  _basketDishInfo(theme, context),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            '${basketDish.dish.price} ₽',
+                            style: theme.headline4,
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            basketDish.dish.weight,
+                            style: theme.caption1,
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width - 260,
+                      ),
+                      CounterWidget(
+                        count: basketDish.count.toString(),
+                        onCountPressed: (bool isPlus) {
+                          if (isPlus) {
+                            BasketBloc.read(context).add(AddDish(dish: basketDish.dish));
+                          } else {
+                            BasketBloc.read(context).add(RemoveDish(dish: basketDish.dish));
+                          }
+                        },
+                      )
+                    ],
+                  ),
                 ],
               )
             ],
@@ -54,39 +85,6 @@ class BasketDishWidget extends StatelessWidget {
           const Divider()
         ],
       ),
-    );
-  }
-
-  Row _basketDishInfo(AppTheme theme, BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Column(
-          children: [
-            Text(
-              '${basketDish.dish.price} ₽',
-              style: theme.headline4,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              basketDish.dish.weight,
-              style: theme.caption1,
-            )
-          ],
-        ),
-        // const Spacer(),
-        CounterWidget(
-          count: basketDish.count.toString(),
-          onCountPressed: (bool isPlus) {
-            if (isPlus) {
-              BasketBloc.read(context).add(AddDish(dish: basketDish.dish));
-            } else {
-              BasketBloc.read(context).add(RemoveDish(dish: basketDish.dish));
-            }
-          },
-        )
-      ],
     );
   }
 }

@@ -1,7 +1,8 @@
 import 'package:farfor_test_project/configurations/navigation/page_manager.dart';
 import 'package:farfor_test_project/configurations/theme/app_theme.dart';
+import 'package:farfor_test_project/views/blocs/basket_bloc/basket_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AnimatedBasketTextWidget extends StatefulWidget {
   const AnimatedBasketTextWidget({super.key, required this.totalPrice});
@@ -14,7 +15,6 @@ class AnimatedBasketTextWidget extends StatefulWidget {
 
 class _AnimatedBasketTextWidgetState extends State<AnimatedBasketTextWidget> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -24,7 +24,6 @@ class _AnimatedBasketTextWidgetState extends State<AnimatedBasketTextWidget> wit
       vsync: this,
       duration: const Duration(milliseconds: 400),
     );
-    _animation = Tween<double>(begin: 0, end: widget.totalPrice.toDouble()).animate(_controller);
     _controller.forward();
   }
 
@@ -38,19 +37,26 @@ class _AnimatedBasketTextWidgetState extends State<AnimatedBasketTextWidget> wit
   Widget build(BuildContext context) {
     final theme = AppTheme.read(context);
     final activeTab = context.select((PageManager pageManager) => pageManager.state.activeTab);
-    return Center(
-      child: TweenAnimationBuilder(
-        tween: _animation as Tween<double>,
-        builder: (context, value, child) {
-          return Text(
-            value.toStringAsFixed(0),
-            style: theme.caption1.copyWith(
-              color: activeTab == TabsList.basket ? theme.bottomNavigationItemSelectedColor : theme.bottomNavigationItemUnselectedColor,
+    return BlocBuilder<BasketBloc, BasketState>(
+      builder: (context, state) {
+        return SizedBox(
+          width: 56,
+          height: 18,
+          child: Center(
+            child: TweenAnimationBuilder<double>(
+              tween: Tween<double>(begin: 0, end: widget.totalPrice.toDouble())..animate(_controller),
+              builder: (context, value, child) {
+                return Text(
+                  ' ${value.toStringAsFixed(0)} ₽',
+                  style: theme.caption1
+                      .copyWith(color: activeTab == TabsList.basket ? theme.bottomNavigationItemSelectedColor : theme.bottomNavigationItemUnselectedColor),
+                );
+              },
+              duration: const Duration(milliseconds: 400),
             ),
-          );
-        },
-        duration: const Duration(milliseconds: 400),
-      ),
+          ),
+        );
+      },
     );
   }
 }

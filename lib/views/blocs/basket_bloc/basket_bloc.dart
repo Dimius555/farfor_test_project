@@ -58,6 +58,12 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
   }
 
   int _calculateTotalPrice(List<BasketDish> list) {
-    return 0;
+    int total = 0;
+
+    for (var element in list) {
+      total += element.count * element.dish.price;
+    }
+
+    return total;
   }
 }

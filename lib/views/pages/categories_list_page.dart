@@ -24,33 +24,41 @@ class CategoriesListPage extends StatelessWidget {
     final theme = AppTheme.read(context);
     final dishState = DishesBloc.watchState(context);
     if (dishState.status is OkDishes) {
-      return CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            toolbarHeight: 150,
-            title: Image.asset('assets/images/promo_image.png'),
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Карегории',
+            style: AppTheme.read(context).headline1,
           ),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            sliver: SliverGrid.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                ),
-                itemCount: dishState.categories.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return DishCategoryWidget(
-                      category: dishState.categories[index],
-                      onPressed: () {
-                        PageManager.read(context).push(DishesListPage.page(category: dishState.categories[index]));
-                      });
-                }),
-          ),
-          const SliverFillRemaining(
-            hasScrollBody: false,
-          )
-        ],
+        ),
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              toolbarHeight: 150,
+              title: Image.asset('assets/images/promo_image.png'),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              sliver: SliverGrid.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                  ),
+                  itemCount: dishState.categories.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return DishCategoryWidget(
+                        category: dishState.categories[index],
+                        onPressed: () {
+                          PageManager.read(context).push(DishesListPage.page(category: dishState.categories[index]));
+                        });
+                  }),
+            ),
+            const SliverFillRemaining(
+              hasScrollBody: false,
+            )
+          ],
+        ),
       );
     } else {
       return const LoadingWidget();

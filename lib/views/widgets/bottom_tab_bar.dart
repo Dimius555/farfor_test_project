@@ -23,6 +23,7 @@ class _BottomTabBarState extends State<BottomTabBar> {
   Widget build(BuildContext context) {
     final double bottomPadding = MediaQuery.of(context).padding.bottom;
     final theme = AppTheme.read(context);
+    final basketState = BasketBloc.watchState(context);
     return DecoratedBox(
       decoration: BoxDecoration(
         color: theme.primaryBackgroundColor,
@@ -46,19 +47,33 @@ class _BottomTabBarState extends State<BottomTabBar> {
                 color: widget.activeTab == TabsList.main ? theme.bottomNavigationItemSelectedColor : theme.bottomNavigationItemUnselectedColor,
               ),
             ),
-            _TabButton(
-              label: 'Корзина',
-              onTap: () {
-                PageManager.read(context).changeTab(TabsList.basket);
-              },
-              active: widget.activeTab == TabsList.basket,
-              icon: SvgPicture.asset(
-                AppIcons.iconMenu,
-                width: 24,
-                height: 24,
-                color: widget.activeTab == TabsList.basket ? theme.bottomNavigationItemSelectedColor : theme.bottomNavigationItemUnselectedColor,
+            if (basketState.total == 0)
+              _TabButton(
+                  label: 'Корзина',
+                  onTap: () {
+                    PageManager.read(context).changeTab(TabsList.basket);
+                  },
+                  active: widget.activeTab == TabsList.basket,
+                  icon: SvgPicture.asset(
+                    AppIcons.iconBasketEmpty,
+                    width: 24,
+                    height: 24,
+                    color: widget.activeTab == TabsList.basket ? theme.bottomNavigationItemSelectedColor : theme.bottomNavigationItemUnselectedColor,
+                  )),
+            if (basketState.total != 0)
+              _TabButton(
+                label: 'Корзина',
+                onTap: () {
+                  PageManager.read(context).changeTab(TabsList.basket);
+                },
+                active: widget.activeTab == TabsList.basket,
+                icon: SvgPicture.asset(
+                  AppIcons.iconBasketFilled,
+                  width: 24,
+                  height: 24,
+                  color: widget.activeTab == TabsList.basket ? theme.bottomNavigationItemSelectedColor : theme.bottomNavigationItemUnselectedColor,
+                ),
               ),
-            ),
           ],
         ),
       ),
@@ -94,8 +109,7 @@ class _TabButton extends StatelessWidget {
             ),
             if ((label == 'Корзина' && basketState.total == 0) || label != 'Корзина')
               Text(label, style: theme.caption1.copyWith(color: active ? theme.bottomNavigationItemSelectedColor : theme.bottomNavigationItemUnselectedColor)),
-            if (label == "Корзина" && basketState.total != 0)
-            AnimatedBasketTextWidget(totalPrice: basketState.total),
+            if (label == "Корзина" && basketState.total != 0) AnimatedBasketTextWidget(totalPrice: basketState.total),
             SizedBox(
               height: MediaQuery.of(context).padding.bottom + 2,
             ),
