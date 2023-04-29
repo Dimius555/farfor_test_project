@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 part 'app_colors.dart';
 
@@ -12,34 +11,12 @@ class AppTheme {
         useMaterial3: true,
         brightness: Brightness.light,
         scaffoldBackgroundColor: LightModeColors.primaryBackgroundColor,
-        dividerColor: Colors.transparent,
-        appBarTheme: const AppBarTheme(
-          systemOverlayStyle:
-              SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: Brightness.light, statusBarBrightness: Brightness.dark),
-          centerTitle: true,
-          backgroundColor: LightModeColors.primaryBackgroundColor,
-          elevation: 0,
-          shadowColor: Color.fromRGBO(0, 0, 0, 0.1),
-        ),
-        colorScheme: const ColorScheme.light(
-          onSecondary: Colors.white,
-        ),
-        textTheme: const TextTheme(),
       );
 
   static ThemeData darkTheme() => ThemeData(
         brightness: Brightness.dark,
         useMaterial3: true,
         scaffoldBackgroundColor: DarkModeColors.primaryBackgroundColor,
-        dividerColor: Colors.transparent,
-        appBarTheme: const AppBarTheme(
-          systemOverlayStyle:
-              SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: Brightness.light, statusBarBrightness: Brightness.dark),
-          centerTitle: true,
-          backgroundColor: DarkModeColors.primaryBackgroundColor,
-          elevation: 0,
-          shadowColor: Color.fromRGBO(0, 0, 0, 0.1),
-        ),
       );
 
   static AppTheme read(BuildContext context) {
