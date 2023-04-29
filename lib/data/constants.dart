@@ -6,3 +6,7 @@ class AppIcons {
   static const String iconBasketFilled = 'assets/icons/ic_basket_filled.svg';
   static const String iconBackArrow = 'assets/icons/ic_back_arrow.svg';
 }
+
+class AppConstants {
+  static const baseURL = 'https://gist.githubusercontent.com';
+}
