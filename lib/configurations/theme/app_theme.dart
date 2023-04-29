@@ -17,7 +17,7 @@ class AppTheme {
           systemOverlayStyle:
               SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: Brightness.light, statusBarBrightness: Brightness.dark),
           centerTitle: true,
-          backgroundColor: LightModeColors.primaryAppBarColor,
+          backgroundColor: LightModeColors.primaryBackgroundColor,
           elevation: 0,
           shadowColor: Color.fromRGBO(0, 0, 0, 0.1),
         ),
@@ -36,7 +36,7 @@ class AppTheme {
           systemOverlayStyle:
               SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: Brightness.light, statusBarBrightness: Brightness.dark),
           centerTitle: true,
-          backgroundColor: DarkModeColors.primaryAppBarColor,
+          backgroundColor: DarkModeColors.primaryBackgroundColor,
           elevation: 0,
           shadowColor: Color.fromRGBO(0, 0, 0, 0.1),
         ),
@@ -50,15 +50,19 @@ class AppTheme {
 
   Color get primaryBackgroundColor => isDarkTheme ? DarkModeColors.primaryBackgroundColor : LightModeColors.primaryBackgroundColor;
   Color get secondaryBackgroundColor => isDarkTheme ? DarkModeColors.secondaryBackgroundColor : LightModeColors.secondaryBackgroundColor;
-  Color get primaryBackgroundInvertedColor => isDarkTheme ? LightModeColors.primaryBackgroundColor : DarkModeColors.primaryBackgroundColor;
-  Color get primaryAppBarColor => isDarkTheme ? DarkModeColors.primaryAppBarColor : LightModeColors.primaryAppBarColor;
-  Color get primaryCardBackgroundColor => isDarkTheme ? DarkModeColors.primaryCardBackgroundColor : LightModeColors.primaryCardBackgroundColor;
-  Color get footerBackgroundColor => isDarkTheme ? DarkModeColors.footerBackgroundColor : LightModeColors.footerBackgroundColor;
+  Color get notchColor => isDarkTheme ? DarkModeColors.notchColor : LightModeColors.notchColor;
+  Color get bottomNavigationItemSelectedColor =>
+      isDarkTheme ? DarkModeColors.bottomNavigationItemSelectedColor : LightModeColors.bottomNavigationItemSelectedColor;
+  Color get bottomNavigationItemUnselectedColor =>
+      isDarkTheme ? DarkModeColors.bottomNavigationItemUnselectedColor : LightModeColors.bottomNavigationItemUnselectedColor;
   Color get shadowColor => isDarkTheme ? DarkModeColors.shadowColor : LightModeColors.shadowColor;
   Color get accentPositiveColor => isDarkTheme ? DarkModeColors.accentPositiveColor : LightModeColors.accentPositiveColor;
   Color get accentWarningColor => isDarkTheme ? DarkModeColors.accentWarningColor : LightModeColors.accentWarningColor;
   Color get accentNegativeColor => isDarkTheme ? DarkModeColors.accentNegativeColor : LightModeColors.accentNegativeColor;
-  Color get linksColor => isDarkTheme ? DarkModeColors.textLinkColor : LightModeColors.textLinkColor;
+
+  Color get textPrimaryColor => isDarkTheme ? DarkModeColors.textPrimaryColor : LightModeColors.textPrimaryColor;
+  Color get textSecondaryColor => isDarkTheme ? DarkModeColors.textSecondaryColor : LightModeColors.textSecondaryColor;
+  Color get appAccentColor => isDarkTheme ? DarkModeColors.appAccentColor : LightModeColors.appAccentColor;
 
   TextStyle get headline1 => TextStyle(
         fontSize: 20,
