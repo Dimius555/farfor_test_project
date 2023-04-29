@@ -12,7 +12,7 @@ class AppRouter {
         path: '/',
         pageBuilder: (context, state) {
           return CustomTransitionPage(
-              child: const AppTabPage(),
+              child: AppTabPage(),
               transitionsBuilder: (context, animation, secondAnimation, child) {
                 return FadeTransition(
                   opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
