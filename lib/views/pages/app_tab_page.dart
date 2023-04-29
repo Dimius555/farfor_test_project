@@ -1,4 +1,4 @@
-import 'package:farfor_test_project/views/widgets/dish_category_widget.dart';
+import 'package:farfor_test_project/views/widgets/basket_dish_widget.dart';
 import 'package:flutter/material.dart';
 
 class AppTabPage extends StatelessWidget {
@@ -7,14 +7,8 @@ class AppTabPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final theme = AppTheme.read(context);
-    return Scaffold(
-      body: Center(
-        child: DishCategoryWidget(
-          categoryName: 'Test',
-          imageURL: 'https://picsum.photos/200/310',
-          onPressed: () {},
-        ),
-      ),
+    return const Scaffold(
+      body: Center(child: BasketDishWidget()),
     );
   }
 }

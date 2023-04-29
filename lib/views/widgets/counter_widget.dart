@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CounterWidget extends StatelessWidget {
-  const CounterWidget({super.key});
+  const CounterWidget({super.key, required this.onCountPressed, required this.count});
+
+  final String count;
+  final Function(bool isPlus) onCountPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +22,26 @@ class CounterWidget extends StatelessWidget {
       height: 40,
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: const [
-          _CounterButton(svgIcon: AppIcons.iconMinus),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.0),
-            child: Text('3'),
+        children: [
+          _CounterButton(
+            svgIcon: AppIcons.iconMinus,
+            onPressed: () {
+              onCountPressed.call(false);
+            },
           ),
-          _CounterButton(svgIcon: AppIcons.iconPlus),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Text(
+              count,
+              style: theme.caption1,
+            ),
+          ),
+          _CounterButton(
+            svgIcon: AppIcons.iconPlus,
+            onPressed: () {
+              onCountPressed.call(true);
+            },
+          ),
         ],
       ),
     );
@@ -33,14 +49,17 @@ class CounterWidget extends StatelessWidget {
 }
 
 class _CounterButton extends StatelessWidget {
-  const _CounterButton({required this.svgIcon});
+  const _CounterButton({required this.svgIcon, required this.onPressed});
 
   final String svgIcon;
+  final Function onPressed;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        onPressed.call();
+      },
       borderRadius: const BorderRadius.all(Radius.circular(20.0)),
       child: SizedBox(
         width: 40,

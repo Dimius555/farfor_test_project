@@ -1,6 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:farfor_test_project/configurations/theme/app_theme.dart';
-import 'package:farfor_test_project/data/cache/default_cache_manager.dart';
+import 'package:farfor_test_project/views/widgets/cached_image.dart';
 import 'package:flutter/material.dart';
 
 class DishCategoryWidget extends StatelessWidget {
@@ -43,17 +42,7 @@ class DishCategoryWidget extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              AspectRatio(
-                aspectRatio: aspectRatio,
-                child: CachedNetworkImage(
-                  fit: BoxFit.fill,
-                  imageUrl: imageURL,
-                  cacheManager: DefaultCacheManager(),
-                  placeholder: (_, __) => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-              ),
+              AspectRatio(aspectRatio: aspectRatio, child: CachedImage(imageURL: imageURL)),
               Padding(
                 padding: const EdgeInsets.only(
                   left: 20.0,

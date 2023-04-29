@@ -1,7 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:farfor_test_project/configurations/theme/app_theme.dart';
-import 'package:farfor_test_project/data/cache/default_cache_manager.dart';
 import 'package:farfor_test_project/data/constants.dart';
+import 'package:farfor_test_project/views/widgets/cached_image.dart';
 import 'package:farfor_test_project/views/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 
@@ -60,14 +59,7 @@ class DishListWidget extends StatelessWidget {
                         Radius.circular(10.0),
                       ),
                     ),
-                    child: CachedNetworkImage(
-                      fit: BoxFit.fill,
-                      imageUrl: imageURL,
-                      cacheManager: DefaultCacheManager(),
-                      placeholder: (_, __) => const Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    ),
+                    child: CachedImage(imageURL: imageURL),
                   ),
                 ),
                 Padding(
