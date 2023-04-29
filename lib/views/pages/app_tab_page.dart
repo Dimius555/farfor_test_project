@@ -1,4 +1,4 @@
-import 'package:farfor_test_project/configurations/theme/app_theme.dart';
+import 'package:farfor_test_project/views/widgets/dish_category_widget.dart';
 import 'package:flutter/material.dart';
 
 class AppTabPage extends StatelessWidget {
@@ -6,12 +6,15 @@ class AppTabPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = AppTheme.read(context);
+    // final theme = AppTheme.read(context);
     return Scaffold(
-        body: Center(
-            child: Text(
-      'Test',
-      style: theme.button1,
-    )));
+      body: Center(
+        child: DishCategoryWidget(
+          categoryName: 'Test',
+          imageURL: 'https://picsum.photos/200/310',
+          onPressed: () {},
+        ),
+      ),
+    );
   }
 }

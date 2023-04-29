@@ -55,7 +55,7 @@ class AppTheme {
       isDarkTheme ? DarkModeColors.bottomNavigationItemSelectedColor : LightModeColors.bottomNavigationItemSelectedColor;
   Color get bottomNavigationItemUnselectedColor =>
       isDarkTheme ? DarkModeColors.bottomNavigationItemUnselectedColor : LightModeColors.bottomNavigationItemUnselectedColor;
-  Color get shadowColor => isDarkTheme ? DarkModeColors.shadowColor : LightModeColors.shadowColor;
+  Color get shadowColor => isDarkTheme ? DarkModeColors.shadowColor.withOpacity(0.1) : LightModeColors.shadowColor.withOpacity(0.1);
   Color get accentPositiveColor => isDarkTheme ? DarkModeColors.accentPositiveColor : LightModeColors.accentPositiveColor;
   Color get accentWarningColor => isDarkTheme ? DarkModeColors.accentWarningColor : LightModeColors.accentWarningColor;
   Color get accentNegativeColor => isDarkTheme ? DarkModeColors.accentNegativeColor : LightModeColors.accentNegativeColor;
