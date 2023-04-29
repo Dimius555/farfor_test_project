@@ -4,10 +4,11 @@ import 'package:farfor_test_project/views/blocs/basket_bloc/basket_bloc.dart';
 import 'package:farfor_test_project/views/widgets/cached_image.dart';
 import 'package:farfor_test_project/views/widgets/counter_widget.dart';
 import 'package:farfor_test_project/views/widgets/custom_buttom.dart';
+import 'package:farfor_test_project/views/widgets/app_actions_dialog.dart';
 import 'package:flutter/material.dart';
 
 class DishDetailsPage extends StatefulWidget {
-  DishDetailsPage({super.key, required this.dish});
+  const DishDetailsPage({super.key, required this.dish});
 
   final Dish dish;
 
@@ -69,7 +70,25 @@ class _DishDetailsPageState extends State<DishDetailsPage> {
                       if (isPlus) {
                         BasketBloc.read(context).add(AddDish(dish: widget.dish));
                       } else {
-                        BasketBloc.read(context).add(RemoveDish(dish: widget.dish));
+                        if (basketState.dishes.firstWhere((element) => element.dish.id == widget.dish.id).count == 1) {
+                          showDialog(
+                              context: context,
+                              builder: (cntxt) {
+                                return AppActionDialog(
+                                    approveButtonCallback: () {
+                                      BasketBloc.read(context).add(RemoveDish(dish: widget.dish));
+                                      Navigator.pop(cntxt);
+                                    },
+                                    approveButtonTitle: 'Да',
+                                    disapproveButtonCallback: () {
+                                      Navigator.pop(cntxt);
+                                    },
+                                    disapproveButtonTitle: 'Нет',
+                                    text: 'Вы уверены, что хотите убрать из корзины блюдо: ${widget.dish.name}?');
+                              });
+                        } else {
+                          BasketBloc.read(context).add(RemoveDish(dish: widget.dish));
+                        }
                       }
                     },
                     count: basketState.dishes.firstWhere((element) => element.dish.id == widget.dish.id).count.toString()),

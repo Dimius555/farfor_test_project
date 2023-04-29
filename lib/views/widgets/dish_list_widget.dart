@@ -6,6 +6,7 @@ import 'package:farfor_test_project/views/widgets/cached_image.dart';
 import 'package:farfor_test_project/views/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 
+import 'app_actions_dialog.dart';
 import 'counter_widget.dart';
 
 class DishListWidget extends StatefulWidget {
@@ -120,7 +121,25 @@ class _DishListWidgetState extends State<DishListWidget> {
                             if (isPlus) {
                               BasketBloc.read(context).add(AddDish(dish: widget.dish));
                             } else {
-                              BasketBloc.read(context).add(RemoveDish(dish: widget.dish));
+                              if (basketState.dishes.firstWhere((element) => element.dish.id == widget.dish.id).count == 1) {
+                                showDialog(
+                                    context: context,
+                                    builder: (cntxt) {
+                                      return AppActionDialog(
+                                          approveButtonCallback: () {
+                                            BasketBloc.read(context).add(RemoveDish(dish: widget.dish));
+                                            Navigator.pop(cntxt);
+                                          },
+                                          approveButtonTitle: 'Да',
+                                          disapproveButtonCallback: () {
+                                            Navigator.pop(cntxt);
+                                          },
+                                          disapproveButtonTitle: 'Нет',
+                                          text: 'Вы уверены, что хотите убрать из корзины блюдо: ${widget.dish.name}?');
+                                    });
+                              } else {
+                                BasketBloc.read(context).add(RemoveDish(dish: widget.dish));
+                              }
                             }
                           },
                           count: basketState.dishes.firstWhere((element) => element.dish.id == widget.dish.id).count.toString()),

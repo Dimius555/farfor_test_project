@@ -5,6 +5,8 @@ import 'package:farfor_test_project/views/widgets/cached_image.dart';
 import 'package:farfor_test_project/views/widgets/counter_widget.dart';
 import 'package:flutter/material.dart';
 
+import 'app_actions_dialog.dart';
+
 class BasketDishWidget extends StatelessWidget {
   const BasketDishWidget({super.key, required this.basketDish});
 
@@ -72,7 +74,25 @@ class BasketDishWidget extends StatelessWidget {
                           if (isPlus) {
                             BasketBloc.read(context).add(AddDish(dish: basketDish.dish));
                           } else {
-                            BasketBloc.read(context).add(RemoveDish(dish: basketDish.dish));
+                            if (basketDish.count == 1) {
+                              showDialog(
+                                  context: context,
+                                  builder: (cntxt) {
+                                    return AppActionDialog(
+                                        approveButtonCallback: () {
+                                          BasketBloc.read(context).add(RemoveDish(dish: basketDish.dish));
+                                          Navigator.pop(cntxt);
+                                        },
+                                        approveButtonTitle: 'Да',
+                                        disapproveButtonCallback: () {
+                                          Navigator.pop(cntxt);
+                                        },
+                                        disapproveButtonTitle: 'Нет',
+                                        text: 'Вы уверены, что хотите убрать из корзины блюдо: ${basketDish.dish.name}?');
+                                  });
+                            } else {
+                              BasketBloc.read(context).add(RemoveDish(dish: basketDish.dish));
+                            }
                           }
                         },
                       )
