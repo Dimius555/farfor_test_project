@@ -12,14 +12,14 @@ class AppTheme {
       brightness: Brightness.light,
       scaffoldBackgroundColor: LightModeColors.primaryBackgroundColor,
       dividerColor: const Color(0xFFF1F4F9),
-      appBarTheme: const AppBarTheme(backgroundColor: LightModeColors.primaryBackgroundColor, elevation: 0));
+      appBarTheme: const AppBarTheme(elevation: 0));
 
   static ThemeData darkTheme() => ThemeData(
       brightness: Brightness.dark,
       useMaterial3: true,
       scaffoldBackgroundColor: DarkModeColors.primaryBackgroundColor,
       dividerColor: const Color(0xFFF1F4F9),
-      appBarTheme: const AppBarTheme(backgroundColor: LightModeColors.primaryBackgroundColor, elevation: 0));
+      appBarTheme: const AppBarTheme(elevation: 0));
 
   static AppTheme read(BuildContext context) {
     return AppTheme(brightness: Theme.of(context).brightness);
