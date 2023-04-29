@@ -1,10 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:farfor_test_project/configurations/localization/localization_notifier.dart';
+import 'package:farfor_test_project/configurations/navigation/page_manager.dart';
 import 'package:farfor_test_project/configurations/theme/theme_notifier.dart';
 import 'package:farfor_test_project/service_locator.dart';
 import 'package:farfor_test_project/views/blocs/basket_bloc/basket_bloc.dart';
 import 'package:farfor_test_project/views/blocs/dishes_bloc/dishes_bloc.dart';
-import 'package:farfor_test_project/views/pages/home_page.dart';
+import 'package:farfor_test_project/views/pages/app_tab_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -37,6 +38,9 @@ class AppSetup extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
+          create: (_) => PageManager(),
+        ),
+        BlocProvider(
           create: (_) => DishesBloc(restaurantRepository: sl())..add(LoadDishes()),
         ),
         BlocProvider(
@@ -66,7 +70,7 @@ class MainApp extends StatelessWidget {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             debugShowCheckedModeBanner: false,
-            home: const HomePage(),
+            home: const AppPage(),
             theme: AppTheme.lightTheme(),
             darkTheme: AppTheme.darkTheme(),
             themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,

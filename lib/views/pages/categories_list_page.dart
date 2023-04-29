@@ -1,14 +1,23 @@
+import 'package:farfor_test_project/configurations/navigation/page_manager.dart';
 import 'package:farfor_test_project/configurations/theme/app_theme.dart';
-import 'package:farfor_test_project/data/models/dish_category.dart';
 import 'package:farfor_test_project/views/blocs/dishes_bloc/dishes_bloc.dart';
+import 'package:farfor_test_project/views/pages/dishes_list_page.dart';
 import 'package:farfor_test_project/views/widgets/dish_category_widget.dart';
 import 'package:farfor_test_project/views/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesListPage extends StatelessWidget {
-  const CategoriesListPage({super.key, required this.onCategoryPressed});
+  const CategoriesListPage({super.key});
 
-  final Function(DishCategory category) onCategoryPressed;
+  static MaterialPage<dynamic> page() {
+    return const MaterialPage(
+      child: CategoriesListPage(),
+      key: ValueKey(routeName),
+      name: routeName,
+    );
+  }
+
+  static const routeName = '/categories_list';
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +43,7 @@ class CategoriesListPage extends StatelessWidget {
                   return DishCategoryWidget(
                       category: dishState.categories[index],
                       onPressed: () {
-                        // Navigator.push(context, MaterialPageRoute(builder: (context) => DishesListPage(category: dishState.categories[index])));
-                        onCategoryPressed.call(dishState.categories[index]);
+                        PageManager.read(context).push(DishesListPage.page(category: dishState.categories[index]));
                       });
                 }),
           ),
