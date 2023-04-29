@@ -1,25 +1,45 @@
 import 'package:farfor_test_project/configurations/theme/app_theme.dart';
 import 'package:farfor_test_project/data/constants.dart';
+import 'package:farfor_test_project/data/models/dish.dart';
+import 'package:farfor_test_project/views/blocs/basket_bloc/basket_bloc.dart';
 import 'package:farfor_test_project/views/widgets/cached_image.dart';
 import 'package:farfor_test_project/views/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 
-class DishListWidget extends StatelessWidget {
+import 'counter_widget.dart';
+
+class DishListWidget extends StatefulWidget {
   const DishListWidget({
     super.key,
-    required this.categoryName,
-    required this.imageURL,
+    required this.dish,
     required this.onPressed,
   });
 
-  final String categoryName;
-  final String imageURL;
-
+  final Dish dish;
   final Function onPressed;
+
+  @override
+  State<DishListWidget> createState() => _DishListWidgetState();
+}
+
+class _DishListWidgetState extends State<DishListWidget> {
+  late bool _isInBasket;
+
+  void _checkBasket(BasketState state) {
+    try {
+      state.dishes.firstWhere((element) => element.dish.id == widget.dish.id);
+      _isInBasket = true;
+    } catch (e) {
+      _isInBasket = false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = AppTheme.read(context);
+    final basketState = BasketBloc.watchState(context);
+    _checkBasket(basketState);
+
     return Container(
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
@@ -41,7 +61,7 @@ class DishListWidget extends StatelessWidget {
             Radius.circular(16.0),
           ),
           onTap: () {
-            onPressed.call();
+            widget.onPressed.call();
           },
           child: Padding(
             padding: const EdgeInsets.all(12.0),
@@ -53,13 +73,12 @@ class DishListWidget extends StatelessWidget {
                 AspectRatio(
                   aspectRatio: 149 / 98,
                   child: Container(
-                    clipBehavior: Clip.hardEdge,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(
                         Radius.circular(10.0),
                       ),
                     ),
-                    child: CachedImage(imageURL: imageURL),
+                    child: CachedImage(imageURL: widget.dish.imageURL),
                   ),
                 ),
                 Padding(
@@ -69,20 +88,44 @@ class DishListWidget extends StatelessWidget {
                     bottom: 13.0,
                   ),
                   child: Text(
-                    'Мясная',
+                    widget.dish.name,
                     style: theme.headline4,
                   ),
                 ),
+                const Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      '300 ₽',
+                      '${widget.dish.price} ₽',
                       style: theme.headline4,
                     ),
-                    const CustomIconButton(svgIcon: AppIcons.iconPlus)
+                    const Spacer(),
+                    if (!_isInBasket)
+                      CustomIconButton(
+                        svgIcon: AppIcons.iconPlus,
+                        onPressed: () {
+                          BasketBloc.read(context).add(AddDish(dish: widget.dish));
+                        },
+                      )
                   ],
                 ),
+                if (_isInBasket)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CounterWidget(
+                          onCountPressed: (isPlus) {
+                            if (isPlus) {
+                              BasketBloc.read(context).add(AddDish(dish: widget.dish));
+                            } else {
+                              BasketBloc.read(context).add(RemoveDish(dish: widget.dish));
+                            }
+                          },
+                          count: basketState.dishes.firstWhere((element) => element.dish.id == widget.dish.id).count.toString()),
+                    ],
+                  ),
               ],
             ),
           ),

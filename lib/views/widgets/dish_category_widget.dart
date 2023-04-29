@@ -1,18 +1,17 @@
 import 'package:farfor_test_project/configurations/theme/app_theme.dart';
+import 'package:farfor_test_project/data/models/dish_category.dart';
 import 'package:farfor_test_project/views/widgets/cached_image.dart';
 import 'package:flutter/material.dart';
 
 class DishCategoryWidget extends StatelessWidget {
   const DishCategoryWidget({
     super.key,
-    required this.categoryName,
-    required this.imageURL,
+    required this.category,
     this.aspectRatio = 163 / 123.56,
     required this.onPressed,
   });
 
-  final String categoryName;
-  final String imageURL;
+  final DishCategory category;
   final double aspectRatio;
   final Function onPressed;
 
@@ -41,8 +40,9 @@ class DishCategoryWidget extends StatelessWidget {
           },
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AspectRatio(aspectRatio: aspectRatio, child: CachedImage(imageURL: imageURL)),
+              AspectRatio(aspectRatio: aspectRatio, child: CachedImage(imageURL: category.imageURL)),
               Padding(
                 padding: const EdgeInsets.only(
                   left: 20.0,
@@ -50,8 +50,9 @@ class DishCategoryWidget extends StatelessWidget {
                   bottom: 13.0,
                 ),
                 child: Text(
-                  categoryName,
+                  category.name,
                   style: theme.headline4,
+                  textAlign: TextAlign.start,
                 ),
               )
             ],

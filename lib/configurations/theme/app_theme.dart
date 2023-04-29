@@ -8,16 +8,18 @@ class AppTheme {
   final Brightness brightness;
 
   static ThemeData lightTheme() => ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.light,
-        scaffoldBackgroundColor: LightModeColors.primaryBackgroundColor,
-      );
+      useMaterial3: true,
+      brightness: Brightness.light,
+      scaffoldBackgroundColor: LightModeColors.primaryBackgroundColor,
+      dividerColor: const Color(0xFFF1F4F9),
+      appBarTheme: const AppBarTheme(backgroundColor: LightModeColors.primaryBackgroundColor, elevation: 0));
 
   static ThemeData darkTheme() => ThemeData(
-        brightness: Brightness.dark,
-        useMaterial3: true,
-        scaffoldBackgroundColor: DarkModeColors.primaryBackgroundColor,
-      );
+      brightness: Brightness.dark,
+      useMaterial3: true,
+      scaffoldBackgroundColor: DarkModeColors.primaryBackgroundColor,
+      dividerColor: const Color(0xFFF1F4F9),
+      appBarTheme: const AppBarTheme(backgroundColor: LightModeColors.primaryBackgroundColor, elevation: 0));
 
   static AppTheme read(BuildContext context) {
     return AppTheme(brightness: Theme.of(context).brightness);
@@ -44,7 +46,6 @@ class AppTheme {
   TextStyle get headline1 => TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.w800,
-        height: 24,
         fontFamily: 'raleway_extraBold',
         color: isDarkTheme ? DarkModeColors.textPrimaryColor : LightModeColors.textPrimaryColor,
       );
@@ -53,7 +54,6 @@ class AppTheme {
 
   TextStyle get headline3 => TextStyle(
         fontSize: 16,
-        height: 19.2,
         fontWeight: FontWeight.w800,
         fontFamily: 'raleway_extraBold',
         color: isDarkTheme ? DarkModeColors.textPrimaryColor : LightModeColors.textPrimaryColor,
@@ -61,7 +61,6 @@ class AppTheme {
 
   TextStyle get headline4 => TextStyle(
         fontSize: 14,
-        height: 16.8,
         fontWeight: FontWeight.w800,
         fontFamily: 'raleway_extraBold',
         color: isDarkTheme ? DarkModeColors.textPrimaryColor : LightModeColors.textPrimaryColor,
@@ -69,7 +68,6 @@ class AppTheme {
 
   TextStyle get caption1 => TextStyle(
         fontSize: 12,
-        height: 14.4,
         fontWeight: FontWeight.w600,
         fontFamily: 'raleway_semiBold',
         color: isDarkTheme ? DarkModeColors.textPrimaryColor : LightModeColors.textPrimaryColor,
@@ -77,7 +75,6 @@ class AppTheme {
 
   TextStyle get regular1 => TextStyle(
         fontSize: 22,
-        height: 25.83,
         fontWeight: FontWeight.w800,
         fontFamily: 'raleway_regular',
         color: isDarkTheme ? DarkModeColors.textPrimaryColor : LightModeColors.textPrimaryColor,
@@ -93,7 +90,6 @@ class AppTheme {
 
   TextStyle get regular3 => TextStyle(
         fontSize: 12,
-        height: 14.4,
         fontWeight: FontWeight.w600,
         fontFamily: 'raleway_regular',
         color: isDarkTheme ? DarkModeColors.textPrimaryColor : LightModeColors.textPrimaryColor,
@@ -101,7 +97,6 @@ class AppTheme {
 
   TextStyle get button1 => TextStyle(
         fontSize: 16,
-        height: 24,
         fontWeight: FontWeight.w800,
         fontFamily: 'raleway_extraBold',
         color: isDarkTheme ? DarkModeColors.textPrimaryColor : LightModeColors.textPrimaryColor,
