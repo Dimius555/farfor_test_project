@@ -14,7 +14,7 @@ class CounterWidget extends StatelessWidget {
     final theme = AppTheme.read(context);
     return Container(
       decoration: BoxDecoration(
-        color: theme.secondaryBackgroundColor,
+        color: theme.notchColor,
         borderRadius: const BorderRadius.all(
           Radius.circular(20.0),
         ),
