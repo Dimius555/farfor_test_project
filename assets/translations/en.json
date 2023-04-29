@@ -1,1 +1,16 @@
-{}
+{
+    "yes": "Yes",
+    "no": "No",
+
+    "remove_dish_from_basket_question": "Are you sure that you want to remove from basket dish:",
+
+    "bottom_tab_basket": "Basket",
+    "bottom_tab_food": "Food",
+
+    "i_want_it": "Want it!",
+
+    "categories_title": "Categories",
+    "basket_title": "Basket",
+
+    "empty_basket_message": "The basket is empty =(\nYou have not add anything yet."
+}

@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:farfor_test_project/configurations/localization/locale_keys.g.dart';
 import 'package:farfor_test_project/configurations/theme/app_theme.dart';
 import 'package:farfor_test_project/data/models/dish.dart';
 import 'package:farfor_test_project/views/blocs/basket_bloc/basket_bloc.dart';
@@ -79,12 +81,12 @@ class _DishDetailsPageState extends State<DishDetailsPage> {
                                       BasketBloc.read(context).add(RemoveDish(dish: widget.dish));
                                       Navigator.pop(cntxt);
                                     },
-                                    approveButtonTitle: 'Да',
+                                    approveButtonTitle: LocaleKeys.yes.tr(),
                                     disapproveButtonCallback: () {
                                       Navigator.pop(cntxt);
                                     },
-                                    disapproveButtonTitle: 'Нет',
-                                    text: 'Вы уверены, что хотите убрать из корзины блюдо: ${widget.dish.name}?');
+                                    disapproveButtonTitle: LocaleKeys.no.tr(),
+                                    text: '${LocaleKeys.remove_dish_from_basket_question.tr()} ${widget.dish.name}?');
                               });
                         } else {
                           BasketBloc.read(context).add(RemoveDish(dish: widget.dish));
@@ -94,7 +96,7 @@ class _DishDetailsPageState extends State<DishDetailsPage> {
                     count: basketState.dishes.firstWhere((element) => element.dish.id == widget.dish.id).count.toString()),
               if (!_isInBasket)
                 CustomTextButton(
-                    text: 'Хочу!',
+                    text: LocaleKeys.i_want_it.tr(),
                     onPressed: () {
                       BasketBloc.read(context).add(AddDish(dish: widget.dish));
                     })

@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:farfor_test_project/configurations/localization/locale_keys.g.dart';
 import 'package:farfor_test_project/configurations/navigation/page_manager.dart';
 import 'package:farfor_test_project/configurations/theme/app_theme.dart';
 import 'package:farfor_test_project/views/blocs/dishes_bloc/dishes_bloc.dart';
@@ -27,7 +29,7 @@ class CategoriesListPage extends StatelessWidget {
       return Scaffold(
         appBar: AppBar(
           title: Text(
-            'Карегории',
+            LocaleKeys.categories_title.tr(),
             style: AppTheme.read(context).headline1,
           ),
         ),

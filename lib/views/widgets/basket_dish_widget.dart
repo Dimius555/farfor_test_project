@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:farfor_test_project/configurations/localization/locale_keys.g.dart';
 import 'package:farfor_test_project/configurations/theme/app_theme.dart';
 import 'package:farfor_test_project/data/models/basket_dish.dart';
 import 'package:farfor_test_project/views/blocs/basket_bloc/basket_bloc.dart';
@@ -83,12 +85,12 @@ class BasketDishWidget extends StatelessWidget {
                                           BasketBloc.read(context).add(RemoveDish(dish: basketDish.dish));
                                           Navigator.pop(cntxt);
                                         },
-                                        approveButtonTitle: 'Да',
+                                        approveButtonTitle: LocaleKeys.yes.tr(),
                                         disapproveButtonCallback: () {
                                           Navigator.pop(cntxt);
                                         },
-                                        disapproveButtonTitle: 'Нет',
-                                        text: 'Вы уверены, что хотите убрать из корзины блюдо: ${basketDish.dish.name}?');
+                                        disapproveButtonTitle: LocaleKeys.no.tr(),
+                                        text: '${LocaleKeys.remove_dish_from_basket_question.tr()} ${basketDish.dish.name}?');
                                   });
                             } else {
                               BasketBloc.read(context).add(RemoveDish(dish: basketDish.dish));

@@ -1,1 +1,18 @@
-{}
+{
+
+    "yes": "Да",
+    "no": "Нет",
+
+
+    "remove_dish_from_basket_question": "Вы уверены, что хотите удалить из корзины блюдо:",
+
+    "bottom_tab_basket": "Корзина",
+    "bottom_tab_food": "Еда",
+
+    "i_want_it": "Хочу!",
+
+    "categories_title": "Категории",
+    "basket_title": "Корзина",
+
+    "empty_basket_message": "Корзина пуста =(\nВы пока ничего не добавили в корзину."
+}

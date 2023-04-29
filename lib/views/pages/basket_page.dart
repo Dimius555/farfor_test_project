@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:farfor_test_project/configurations/localization/locale_keys.g.dart';
 import 'package:farfor_test_project/configurations/navigation/page_manager.dart';
 import 'package:farfor_test_project/configurations/theme/app_theme.dart';
 import 'package:farfor_test_project/views/blocs/basket_bloc/basket_bloc.dart';
@@ -25,7 +27,7 @@ class BasketPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Корзина',
+          LocaleKeys.basket_title.tr(),
           style: AppTheme.read(context).headline1,
         ),
         leading: BackButton(
@@ -35,7 +37,7 @@ class BasketPage extends StatelessWidget {
       body: basketState.dishes.isEmpty
           ? Center(
               child: Text(
-                'Корзина пуста =(\nВы пока ничего не добавили в корзину.',
+                LocaleKeys.empty_basket_message.tr(),
                 textAlign: TextAlign.center,
                 style: theme.headline3,
               ),

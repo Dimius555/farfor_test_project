@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:farfor_test_project/configurations/localization/locale_keys.g.dart';
 import 'package:farfor_test_project/configurations/theme/app_theme.dart';
 import 'package:farfor_test_project/data/constants.dart';
 import 'package:farfor_test_project/data/models/dish.dart';
@@ -130,12 +132,12 @@ class _DishListWidgetState extends State<DishListWidget> {
                                             BasketBloc.read(context).add(RemoveDish(dish: widget.dish));
                                             Navigator.pop(cntxt);
                                           },
-                                          approveButtonTitle: 'Да',
+                                          approveButtonTitle: LocaleKeys.yes.tr(),
                                           disapproveButtonCallback: () {
                                             Navigator.pop(cntxt);
                                           },
-                                          disapproveButtonTitle: 'Нет',
-                                          text: 'Вы уверены, что хотите убрать из корзины блюдо: ${widget.dish.name}?');
+                                          disapproveButtonTitle: LocaleKeys.no.tr(),
+                                          text: '${LocaleKeys.remove_dish_from_basket_question.tr()} ${widget.dish.name}?');
                                     });
                               } else {
                                 BasketBloc.read(context).add(RemoveDish(dish: widget.dish));

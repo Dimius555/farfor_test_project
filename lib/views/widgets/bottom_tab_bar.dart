@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:farfor_test_project/configurations/localization/locale_keys.g.dart';
 import 'package:farfor_test_project/configurations/navigation/page_manager.dart';
 import 'package:farfor_test_project/configurations/theme/app_theme.dart';
 import 'package:farfor_test_project/data/constants.dart';
@@ -49,7 +51,7 @@ class _BottomTabBarState extends State<BottomTabBar> {
             ),
             if (basketState.total == 0)
               _TabButton(
-                  label: 'Корзина',
+                  label: LocaleKeys.bottom_tab_basket.tr(),
                   onTap: () {
                     PageManager.read(context).changeTab(TabsList.basket);
                   },
@@ -62,7 +64,7 @@ class _BottomTabBarState extends State<BottomTabBar> {
                   )),
             if (basketState.total != 0)
               _TabButton(
-                label: 'Корзина',
+                label: LocaleKeys.bottom_tab_basket.tr(),
                 onTap: () {
                   PageManager.read(context).changeTab(TabsList.basket);
                 },
@@ -107,9 +109,9 @@ class _TabButton extends StatelessWidget {
             const SizedBox(
               height: 4,
             ),
-            if ((label == 'Корзина' && basketState.total == 0) || label != 'Корзина')
+            if ((label == LocaleKeys.bottom_tab_basket.tr() && basketState.total == 0) || label != LocaleKeys.bottom_tab_basket.tr())
               Text(label, style: theme.caption1.copyWith(color: active ? theme.bottomNavigationItemSelectedColor : theme.bottomNavigationItemUnselectedColor)),
-            if (label == "Корзина" && basketState.total != 0) AnimatedBasketTextWidget(totalPrice: basketState.total),
+            if (label == LocaleKeys.bottom_tab_basket.tr() && basketState.total != 0) AnimatedBasketTextWidget(totalPrice: basketState.total),
             SizedBox(
               height: MediaQuery.of(context).padding.bottom + 2,
             ),
