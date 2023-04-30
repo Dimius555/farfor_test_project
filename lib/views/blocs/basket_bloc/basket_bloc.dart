@@ -1,3 +1,4 @@
+import 'package:farfor_test_project/configurations/interfaces/basket_repository.dart';
 import 'package:farfor_test_project/data/models/basket_dish.dart';
 import 'package:farfor_test_project/data/models/dish.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +12,20 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
   static BasketState watchState(BuildContext context) => context.watch<BasketBloc>().state;
   static BasketBloc read(BuildContext context) => context.read<BasketBloc>();
 
-  BasketBloc() : super(BasketState(dishes: [])) {
+  final BasketRepository _basketRepository;
+
+  BasketBloc({required BasketRepository basketRepository})
+      : _basketRepository = basketRepository,
+        super(BasketState(dishes: [])) {
+    on<InitBasketEvent>(_initBasket);
     on<AddDish>(_addDishToBasket);
     on<RemoveDish>(_removeDishFromBasket);
+  }
+
+  void _initBasket(InitBasketEvent event, Emitter<BasketState> emit) {
+    final basketDishes = _basketRepository.fetchBasketDishes();
+    final total = _calculateTotalPrice(basketDishes);
+    emit(BasketState(dishes: basketDishes, total: total));
   }
 
   void _removeDishFromBasket(RemoveDish event, Emitter<BasketState> emit) {
@@ -21,12 +33,14 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     if (positionForRemoving.count == 1) {
       final basketDishes = state.dishes..remove(positionForRemoving);
       final total = _calculateTotalPrice(basketDishes);
+      _basketRepository.saveBasketDishes(basketDishes);
       emit(BasketState(dishes: basketDishes, total: total));
     } else {
       final updatedDish = positionForRemoving.copyWith(count: positionForRemoving.count - 1);
       final basketDishes = state.dishes..remove(positionForRemoving);
       basketDishes.add(updatedDish);
       final total = _calculateTotalPrice(basketDishes);
+      _basketRepository.saveBasketDishes(basketDishes);
       emit(BasketState(dishes: basketDishes, total: total));
     }
   }
@@ -44,7 +58,7 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     }
 
     final total = _calculateTotalPrice(basketDishes);
-
+    _basketRepository.saveBasketDishes(basketDishes);
     emit(BasketState(dishes: basketDishes, total: total));
   }
 
