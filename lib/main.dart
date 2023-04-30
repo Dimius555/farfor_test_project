@@ -45,7 +45,7 @@ class AppSetup extends StatelessWidget {
           create: (_) => DishesBloc(restaurantRepository: sl())..add(LoadDishes()),
         ),
         BlocProvider(
-          create: (_) => BasketBloc(),
+          create: (_) => BasketBloc(basketRepository: sl())..add(InitBasketEvent()),
         ),
         BlocProvider(
           create: (_) => SalesBloc(salesRepository: sl())..add(FetchSalesEvent()),

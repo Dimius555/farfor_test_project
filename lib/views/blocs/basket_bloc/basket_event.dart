@@ -19,3 +19,5 @@ class RemoveDish extends BasketEvent {
 
   RemoveDish({required this.dish});
 }
+
+class InitBasketEvent extends BasketEvent {}
