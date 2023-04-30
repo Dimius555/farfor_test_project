@@ -2,9 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:farfor_test_project/configurations/localization/locale_keys.g.dart';
 import 'package:farfor_test_project/configurations/navigation/page_manager.dart';
 import 'package:farfor_test_project/configurations/theme/app_theme.dart';
+import 'package:farfor_test_project/configurations/theme/theme_notifier.dart';
+import 'package:farfor_test_project/service_locator.dart';
 import 'package:farfor_test_project/views/blocs/basket_bloc/basket_bloc.dart';
 import 'package:farfor_test_project/views/widgets/basket_dish_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BasketPage extends StatelessWidget {
   const BasketPage({super.key});
@@ -23,13 +26,21 @@ class BasketPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = AppTheme.read(context);
     final basketState = BasketBloc.watchState(context);
-
+    final isDarkMode = context.watch<ThemeNotifier>().isDarkMode;
     return Scaffold(
       appBar: AppBar(
         title: Text(
           LocaleKeys.basket_title.tr(),
           style: AppTheme.read(context).headline1,
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              sl<ThemeNotifier>().switchTheme();
+            },
+            icon: isDarkMode ? const Icon(Icons.sunny) : const Icon(Icons.nightlight_round),
+          )
+        ],
         leading: BackButton(
           onPressed: () => PageManager.read(context).changeTab(TabsList.main),
         ),
