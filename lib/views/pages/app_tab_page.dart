@@ -72,6 +72,9 @@ class _AppPageState extends State<AppPage> {
               ],
             ),
           ),
+          Divider(
+            color: AppTheme.read(context).secondaryBackgroundColor,
+          ),
           BottomTabBar(
             activeTab: activeTab,
           ),
