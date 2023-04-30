@@ -55,6 +55,7 @@ class _CategoriesListPageState extends State<CategoriesListPage> {
         body: RefreshIndicator(
           onRefresh: () async {
             SalesBloc.read(context).add(SetSalesDateTimeEvent());
+            DishesBloc.read(context).add(LoadDishes(isReloading: true));
           },
           child: CustomScrollView(
             slivers: [
