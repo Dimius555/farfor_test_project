@@ -41,17 +41,22 @@ class _DishDetailsPageState extends State<DishDetailsPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.only(top: 10, bottom: 26),
-            width: 30,
-            height: 6,
-            decoration: BoxDecoration(
-              color: theme.notchColor,
-              borderRadius: const BorderRadius.all(
-                Radius.circular(3.0),
+          const SizedBox(height: 10),
+          Align(
+            alignment: Alignment.center,
+            child: Container(
+              padding: const EdgeInsets.only(top: 10, bottom: 26),
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: theme.notchColor,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(2.0),
+                ),
               ),
             ),
           ),
+          const SizedBox(height: 26),
           AspectRatio(aspectRatio: 335 / 221, child: CachedImage(imageURL: widget.dish.imageURL)),
           const SizedBox(height: 24),
           Text(
